@@ -1,0 +1,24 @@
+bgt0_sub 仕様
+
+名称
+bgt0_sub
+
+アセンブリ言語表現
+bgt0_sub rs, rt, dpl
+(命令 差分保持アドレス，代入先， プログラムカウンタの差分)
+(forもし，rt-rs（これを次のrtとする．）が正ならdplにジャンプする．)
+動作
+rt <- rt - rs;
+if(rt > 0) PC <- PC + dpl else PC <- PC + 1;
+（PCはプログラムカウンタ）
+
+書式
+命令形式はI型
+ビット割当は，
+op(6) rs(5) rt(5) dpl(16)
+
+コード
+  sub rt, rs, rs   
+  blt r0, rt, dpl
+と同じ挙動をライブラリ的に実装
+(bgt rt, r0, dplでも同じだが，今回はbltが実装されているためこうなる．)      
